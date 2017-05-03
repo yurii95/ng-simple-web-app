@@ -1,16 +1,16 @@
-package be.g00glen00b.model;
+package com.globallogic.mykolaiv.campustrainees.simplewebapp.model;
 
 import javax.persistence.*;
 
 
-@Entity
+//@Entity
 public class Item {
-  @Id
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
+//  @Id
+//  @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Integer id;
-  @Column
+//  @Column
   private boolean checked;
-  @Column
+//  @Column
   private String description;
 
   public Integer getId() {

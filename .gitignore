@@ -3,3 +3,9 @@
 .settings/
 target/
 bower_components/
+/target/
+/.bowerrc
+/bower.json
+/LICENSE
+/ng-spring-boot.iml
+/.idea/

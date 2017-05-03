@@ -1,4 +1,4 @@
-package be.g00glen00b;
+package com.globallogic.mykolaiv.campustrainees.simplewebapp;
 
 
 import org.springframework.boot.SpringApplication;
