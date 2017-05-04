@@ -1,3 +1,15 @@
 body {
     background-image: url("../../images/white-background.jpg");
 }
+
+.blue {
+    color: #357ebd;
+}
+
+.error {
+    color: red;
+}
+
+.inline {
+    display: inline;
+}

@@ -1,6 +1,5 @@
 package com.globallogic.mykolaiv.campustrainees.simplewebapp;
 
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.*;
 

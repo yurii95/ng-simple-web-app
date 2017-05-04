@@ -3,8 +3,8 @@
 angular.module('Home')
 
     .factory('BookService',
-        ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout', '$q',
-            function (Base64, $http, $cookieStore, $rootScope, $timeout, $q) {
+        ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout', '$q','$location',
+            function (Base64, $http, $cookieStore, $rootScope, $timeout, $q, $location) {
                 var bookService = {};
 
 
@@ -19,14 +19,14 @@ angular.module('Home')
 
                 };
 
-                bookService.addBook = function (data, callback) {
-                    console.log("IN book service: " + data.title);
-                    console.log("IN book service: " + data.pages);
-                    $http.post('http://localhost:8080/books/new', data)
+                bookService.addBook = function (data, callback, callbackErr) {
+                    $http.post('http://localhost:8080/books/insert', data)
                         .then(function successCallback(response) {
                             callback(response);
                         }, function errorCallback(response) {
-                            console.log("ERROR " + response.status);
+                            console.log("ERRORR " + response.status);
+                            console.log("ERROR " + response.data);
+                            callbackErr(response);
                         });
                 };
 
@@ -42,7 +42,7 @@ angular.module('Home')
                 };
 
                 bookService.updateBook = function (id, data, callback) {
-                    $http.put('http://localhost:8080/books/'+id, data)
+                    $http.put('http://localhost:8080/books/update', data)
                         .then(function successCallback(response) {
                                 callback(response);
                             },
@@ -58,7 +58,8 @@ angular.module('Home')
                                 callback(response);
                             },
                             function errorCallback(errResponse){
-                                console.error('Error while searching book with %s crotetia');
+                                // errResponse.status
+                                // console.error('Error while searching book with %s crotetia');
                             }
                         );
                 };

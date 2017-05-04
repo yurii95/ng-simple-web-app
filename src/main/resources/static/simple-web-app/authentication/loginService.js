@@ -4,25 +4,11 @@ angular.module('Authentication')
 
     .factory('AuthenticationService',
         ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout',
-            function (Base64, $http, $cookieStore, $rootScope, $timeout) {
+            function (Base64, $http, $cookieStore, $rootScope) {
                 var service = {};
 
                 service.Login = function (username, password, callback) {
-
-                    /* Dummy authentication for testing, uses $timeout to simulate api call
-                     ----------------------------------------------*/
-                    // $timeout(function(){
-                    //     var response = { success: username === 'test' && password === 'test' };
-                    //     if(!response.success) {
-                    //         response.message = 'Username or password is incorrect';
-                    //     }
-                    //     callback(response);
-                    // }, 1000);
-
                     $http.post('http://localhost:8080/users/authenticate', { username: username, password: password })
-                       //  .then(function (response) {
-                       //     callback(response);
-                       // });
                         .then(function successCallback(response) {
                         callback(response);
                     }, function errorCallback(response) {
@@ -136,6 +122,4 @@ angular.module('Authentication')
                 return output;
             }
         };
-
-        /* jshint ignore:end */
     });

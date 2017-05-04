@@ -2,24 +2,36 @@
 
 angular.module('Authentication', []);
 angular.module('Home', []);
+angular.module('Registration', []);
 
-angular.module('BasicHttpAuthExample', ['Authentication','Home', 'ngRoute', 'ngCookies'])
+angular.module('BasicHttpAuthExample', ['Authentication','Home', 'Registration' ,'ngRoute', 'ngCookies'])
 
     .config(['$routeProvider', function ($routeProvider) {
+        console.log("config");
         $routeProvider
             .when('/login', {
                 controller: 'LoginController',
                 templateUrl: 'authentication/login.html'
             })
 
-            .when('/new', {
+            .when('/insert', {
                 controller: 'HomeController',
-                templateUrl: 'home/new.html'
+                templateUrl: 'home/insert.html'
+            })
+
+            .when('/500', {
+                controller: 'HomeController',
+                templateUrl: 'error-pages/error_page_http_500.html'
+            })
+
+            .when('/register', {
+                controller: 'RegisterController',
+                templateUrl: 'registration/register.html'
             })
 
             .when('/', {
                 controller: 'HomeController',
-                templateUrl: 'home/home.html'
+                templateUrl: 'home/books.html'
             })
 
             .otherwise({redirectTo: '/login'});
@@ -27,7 +39,7 @@ angular.module('BasicHttpAuthExample', ['Authentication','Home', 'ngRoute', 'ngC
 
     .run(['$rootScope', '$location', '$cookieStore', '$http',
         function ($rootScope, $location, $cookieStore, $http) {
-            // keep user logged in after page refresh
+            console.log("run");
             $rootScope.globals = $cookieStore.get('globals') || {};
             if ($rootScope.globals.currentUser) {
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
@@ -35,7 +47,12 @@ angular.module('BasicHttpAuthExample', ['Authentication','Home', 'ngRoute', 'ngC
 
             $rootScope.$on('$locationChangeStart', function (event, next, current) {
                 // redirect to login page if not logged in
-                if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
+                // if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
+                //     $location.path('/login');
+                // }
+                var restrictedPage = $.inArray($location.path(), ['/login', '/register']) === -1;
+                var loggedIn = $rootScope.globals.currentUser;
+                if (restrictedPage && !loggedIn) {
                     $location.path('/login');
                 }
             });
