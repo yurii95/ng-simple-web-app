@@ -55,7 +55,7 @@ public class BookController {
         return bookService.updateBook(bookEntity);
     }
 
-    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Service exception is occured")
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Service exception is occurred")
     @ExceptionHandler({ServiceException.class})
     public void handleException() {
     }

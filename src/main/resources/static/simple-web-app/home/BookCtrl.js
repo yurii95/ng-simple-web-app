@@ -5,7 +5,6 @@ angular.module('Home')
     .controller('HomeController', ['$scope', '$rootScope', '$location', 'BookService',
         function ($scope, $rootScope, $location, BookService) {
             console.log("home controller executed");
-
             $scope.findAllBooks = function () {
                 BookService.findAllBooks(function (response) {
                     $scope.books=response.data;
@@ -24,7 +23,7 @@ angular.module('Home')
 
             $scope.addBook = function () {
                 $scope.currentBook = {title : $scope.bookTitle, genre : $scope.bookGenre,
-                authors: $scope.bookAuthor, pages: $scope.bookPages, description: $scope.bookDescription};
+                authors: $scope.bookAuthor, pages: $scope.pages, description: $scope.bookDescription};
                 BookService.addBook($scope.currentBook, function (response) {
                     $location.path("/");
                 }, function (response) {

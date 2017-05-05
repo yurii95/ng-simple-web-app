@@ -7,60 +7,17 @@
 <body>
 
 
-<div align="right" >
-    <div class="active pull-right" class = "inline"><a ng-href="index.html#/login">logout</a></div>
-    <div class="active pull-right">Current user: {{globals.currentUser.username}}&nbsp&nbsp  | &nbsp</div>
+<div align="right">
+    <div class="active pull-right" class="inline"><a ng-href="index.html#/login">logout</a></div>
+    <div class="active pull-right">Current user: {{globals.currentUser.username}}&nbsp&nbsp | &nbsp</div>
     <br>
 </div>
-    <div align="right" >
+<div align="right">
     <div class="input-group">
         <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term"
                ng-model="searchString" ng-change="filterBook()">
-        <!--<div class="input-group-btn">-->
-        <!--<button class="btn btn-default" type="button" ng-click="filterBook()" ng-disabled="!searchString"><i class="glyphicon glyphicon-search"></i></button>-->
-        <!--</div>-->
     </div>
-    </div>
-
-
-<!--<div class="row">-->
-<!--<div class="col-lg-6">-->
-<!--<div class="input-group">-->
-<!--<div class="input-group-btn">-->
-<!--<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--Action-->
-<!--</button>-->
-<!--<div class="dropdown-menu">-->
-<!--<a class="dropdown-item" href="#">Action</a>-->
-<!--<a class="dropdown-item" href="#">Another action</a>-->
-<!--<a class="dropdown-item" href="#">Something else here</a>-->
-<!--<div role="separator" class="dropdown-divider"></div>-->
-<!--<a class="dropdown-item" href="#">Separated link</a>-->
-<!--</div>-->
-<!--</div>-->
-<!--<input type="text" class="form-control" aria-label="Text input with dropdown button">-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class ="row">-->
-<!--<div class="col-lg-2">-->
-<!--<div class="input-group">-->
-<!--<input type="text" class="form-control" aria-label="Text input with dropdown button">-->
-<!--<div class="input-group-btn">-->
-<!--<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--Action-->
-<!--</button>-->
-<!--<div class="dropdown-menu dropdown-menu-right">-->
-<!--<a class="dropdown-item" href="#">Action</a>-->
-<!--<a class="dropdown-item" href="#">Another action</a>-->
-<!--<a class="dropdown-item" href="#">Something else here</a>-->
-<!--<div role="separator" class="dropdown-divider"></div>-->
-<!--<a class="dropdown-item" href="#">Separated link</a>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
+</div>
 
 <h1 align="center">All available books</h1>
 
@@ -92,45 +49,44 @@
 
 </table>
 
-<div class="modal fade" id="myModal" role="dialog">
+<div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" data-dismiss="modal" ng-click="findAllBooks()">&times;</button>
                 <h4 class="modal-title">Update book</h4>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="form-group">
+                <form name="form" role="form">
+                    <div class="form-group" ng-class="{ 'has-error': form.title.$dirty && form.title.$error.required}">
                         <label for="title">title</label>
-                        <input type="text" class="form-control" id="title" placeholder="Enter title"
-                               ng-model="currentBook.title">
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" ng-model="currentBook.title" required>
+                        <span ng-show="form.title.$dirty && form.title.$error.required" class="help-block">Title is required</span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group " ng-class="{ 'has-error': form.genre.$dirty && form.genre.$error.required}">
                         <label for="title">Genre</label>
-                        <input type="text" class="form-control" id="genre" placeholder="Enter genre"
-                               ng-model="currentBook.genre">
+                        <input type="text" class="form-control" id="genre" name="genre" placeholder="Enter genre" ng-model="currentBook.genre" required>
+                        <span ng-show="form.genre.$dirty && form.genre.$error.required" class="help-block">Genre is required</span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': form.author.$dirty && form.author.$error.required}">
                         <label for="title">Authors</label>
-                        <input type="text" class="form-control" id="author" placeholder="Enter author"
-                               ng-model="currentBook.authors">
+                        <input type="text" class="form-control" id="author" name="author" placeholder="Enter author" ng-model="currentBook.authors" required>
+                        <span ng-show="form.author.$dirty && form.author.$error.required" class="help-block">Author is required</span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': form.pages.$dirty && form.pages.$error.required || form.pages.$error.pattern }">
                         <label for="title">Pages</label>
-                        <input type="text" class="form-control" id="pages" placeholder="Enter author"
-                               ng-model="currentBook.pages">
+                        <input type="text" class="form-control" id="pages" name="pages" placeholder="Enter pages" ng-model="currentBook.pages" required ng-pattern="/^[0-9]+$/">
+                        <span ng-show="form.pages.$dirty && form.pages.$error.required || form.pages.$error.pattern " class="help-block">Pages is required</span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error': form.description.$dirty && form.description.$error.required}">
                         <label for="title">Description</label>
-                        <input type="text" class="form-control" id="description" placeholder="Enter author"
-                               ng-model="currentBook.description">
+                        <input type="text" class="form-control" id="description" name="description" placeholder="Enter description" ng-model="currentBook.description" required>
+                        <span ng-show="form.description.$dirty && form.description.$error.required" class="help-block">Description is required</span>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-default" ng-click="updateBook(currentBook.idBook)"
+                <button type="button" class="btn btn-default" ng-click="updateBook(currentBook.idBook)" ng-disabled="form.$invalid || dataLoading"
                         data-dismiss="modal">Submit
                 </button>
             </div>
