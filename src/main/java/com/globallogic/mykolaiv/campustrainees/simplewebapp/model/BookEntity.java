@@ -3,16 +3,26 @@ package com.globallogic.mykolaiv.campustrainees.simplewebapp.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotNull;
+
 @Document(collection = "books")
 public class BookEntity {
     @Id
     private String idBook;
 
+    @NotNull
     private String title;
+
+    @NotNull
     private String genre;
+
+    @NotNull
     private String authors;
+
+    @NotNull
     private String pages;
 
+    @NotNull
     private String description;
 
     public String getIdBook() {

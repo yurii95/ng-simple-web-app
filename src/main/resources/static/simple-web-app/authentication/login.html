@@ -6,6 +6,9 @@
 </head>
 <h1 align="center">Hello, please login</h1>
 <div ng-show="error" class="alert alert-danger">{{error}}</div>
+<div class="alert alert-success" ng-show="RegistrationMessage && !error">
+    <strong >{{RegistrationMessage}}</strong>
+</div>
 <form name="form" ng-submit="login()" role="form">
     <div class="form-group">
         <label for="username">Username</label>

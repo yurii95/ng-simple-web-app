@@ -25,29 +25,31 @@
 <p align="right">
     <button type="button" class="btn btn-primary" ng-click="redirect()">Add book</button>
 </p>
-<table class="table table-hover">
-    <tr align="center">
-        <td><b>Title</b></td>
-        <td><b>Genre</b></td>
-        <td><b>Authors</b></td>
-        <td><b>Pages</b></td>
-        <td><b>Description</b></td>
-        <td></td>
-    </tr>
-    <tr ng-repeat="book in books" align="center">
-        <td ng-class='{blue: (book.title.includes(searchString)) && searchString}'>{{book.title}}</td>
-        <td ng-class='{blue: (book.genre.includes(searchString)) && searchString}'>{{book.genre}}</td>
-        <td ng-class='{blue: (book.authors.includes(searchString)) && searchString}'>{{book.authors}}</td>
-        <td>{{book.pages}}</td>
-        <td>{{book.description}}</td>
-        <td align="right">
-            <a data-toggle="modal" ng-click="setDataForUpdate(book)" data-target="#myModal"><span
-                    class="glyphicon glyphicon-pencil"></span></a>&nbsp&nbsp
-            <a ng-click="removeBook(book.idBook)"><span class="glyphicon glyphicon-remove"></span></a>
-        </td>
-    </tr>
+    <table class="table table-hover" >
+        <tr align="center">
+            <td><b>Title</b></td>
+            <td ><b>Genre</b></td>
+            <td><b>Authors</b></td>
+            <td><b>Pages</b></td>
+            <td><b>Description</b></td>
+            <td></td>
+        </tr>
+        <tr ng-repeat="book in books" align="center">
+            <td ng-class='{blue: (book.title.includes(searchString)) && searchString}'>{{book.title}}
+            </td>
+            <td ng-class='{blue: (book.genre.includes(searchString)) && searchString}'>{{book.genre}}</td>
+            <td ng-class='{blue: (book.authors.includes(searchString)) && searchString}'>{{book.authors}}</td>
+            <td>{{book.pages}}</td>
+            <td>{{book.description}}</td>
+            <td align="right">
+                <a data-toggle="modal" ng-click="setDataForUpdate(book)" data-target="#myModal"><span
+                        class="glyphicon glyphicon-pencil"></span></a>&nbsp&nbsp
+                <a ng-click="removeBook(book.idBook)"><span class="glyphicon glyphicon-remove"></span></a>
+            </td>
+        </tr>
 
-</table>
+    </table>
+
 
 <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
@@ -60,38 +62,44 @@
                 <form name="form" role="form">
                     <div class="form-group" ng-class="{ 'has-error': form.title.$dirty && form.title.$error.required}">
                         <label for="title">title</label>
-                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" ng-model="currentBook.title" required>
+                        <input maxlength="30" type="text" class="form-control" id="title" name="title" placeholder="Enter title"
+                               ng-model="currentBook.title" required>
                         <span ng-show="form.title.$dirty && form.title.$error.required" class="help-block">Title is required</span>
                     </div>
                     <div class="form-group " ng-class="{ 'has-error': form.genre.$dirty && form.genre.$error.required}">
                         <label for="title">Genre</label>
-                        <input type="text" class="form-control" id="genre" name="genre" placeholder="Enter genre" ng-model="currentBook.genre" required>
+                        <input maxlength="30" type="text" class="form-control" id="genre" name="genre" placeholder="Enter genre"
+                               ng-model="currentBook.genre" required>
                         <span ng-show="form.genre.$dirty && form.genre.$error.required" class="help-block">Genre is required</span>
                     </div>
-                    <div class="form-group" ng-class="{ 'has-error': form.author.$dirty && form.author.$error.required}">
+                    <div class="form-group"
+                         ng-class="{ 'has-error': form.author.$dirty && form.author.$error.required}">
                         <label for="title">Authors</label>
-                        <input type="text" class="form-control" id="author" name="author" placeholder="Enter author" ng-model="currentBook.authors" required>
+                        <input maxlength="80" type="text" class="form-control" id="author" name="author" placeholder="Enter author"
+                               ng-model="currentBook.authors" required>
                         <span ng-show="form.author.$dirty && form.author.$error.required" class="help-block">Author is required</span>
                     </div>
-                    <div class="form-group" ng-class="{ 'has-error': form.pages.$dirty && form.pages.$error.required || form.pages.$error.pattern }">
+                    <div class="form-group"
+                         ng-class="{ 'has-error': form.pages.$dirty && form.pages.$error.required || form.pages.$error.pattern }">
                         <label for="title">Pages</label>
-                        <input type="text" class="form-control" id="pages" name="pages" placeholder="Enter pages" ng-model="currentBook.pages" required ng-pattern="/^[0-9]+$/">
-                        <span ng-show="form.pages.$dirty && form.pages.$error.required || form.pages.$error.pattern " class="help-block">Pages is required</span>
+                        <input type="text" maxlength="4" class="form-control" id="pages" name="pages" placeholder="Enter pages"
+                               ng-model="currentBook.pages" required ng-pattern="/^[0-9]+$/">
+                        <span ng-show="form.pages.$dirty && form.pages.$error.required || form.pages.$error.pattern "
+                              class="help-block">Only numbers is allowed</span>
                     </div>
-                    <div class="form-group" ng-class="{ 'has-error': form.description.$dirty && form.description.$error.required}">
+                    <div class="form-group"
+                         ng-class="{ 'has-error': form.description.$dirty && form.description.$error.required}">
                         <label for="title">Description</label>
-                        <input type="text" class="form-control" id="description" name="description" placeholder="Enter description" ng-model="currentBook.description" required>
+                        <input type="text" maxlength="80" class="form-control" id="description" name="description"
+                               placeholder="Enter description" ng-model="currentBook.description" required>
                         <span ng-show="form.description.$dirty && form.description.$error.required" class="help-block">Description is required</span>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" ng-click="updateBook(currentBook.idBook)" ng-disabled="form.$invalid || dataLoading"
-                        data-dismiss="modal">Submit
-                </button>
+                <button type="button" class="btn btn-default" ng-click="updateBook(currentBook.idBook)"  ng-disabled="form.$invalid || dataLoading" data-dismiss="modal">Submit</button>
             </div>
         </div>
-
     </div>
 </div>
 </body>

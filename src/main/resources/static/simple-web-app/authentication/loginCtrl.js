@@ -6,6 +6,7 @@ angular.module('Authentication')
         ['$scope', '$rootScope', '$location', 'AuthenticationService',
             function ($scope, $rootScope, $location, AuthenticationService) {
                 AuthenticationService.ClearCredentials();
+                console.log("message" + $rootScope.RegistrationMessage);
                 $scope.login = function () {
                     $scope.dataLoading = true;
                     AuthenticationService.Login($scope.username, $scope.password, function(response) {
@@ -15,6 +16,7 @@ angular.module('Authentication')
                         if(response.data === "true") {
                             AuthenticationService.SetCredentials($scope.username, $scope.password);
                             $location.path('/');
+                            $rootScope.RegistrationMessage="";
                         } else {
                             console.log("User not found");
                             $scope.dataLoading = false;
@@ -24,7 +26,6 @@ angular.module('Authentication')
                 };
 
                 $scope.logout = function () {
-                    console.log("sadsad")
                     AuthenticationService.ClearCredentials();
                 };
             }]);

@@ -11,6 +11,7 @@ angular
                         $location.path("/login");
                         console.log("Response status: "+response.status);
                         $scope.dataLoading = false;
+                        $rootScope.RegistrationMessage="Congratulations!!! Registration completed successfully";
                     },
                     function (response) {
                         $scope.dataLoading = false;

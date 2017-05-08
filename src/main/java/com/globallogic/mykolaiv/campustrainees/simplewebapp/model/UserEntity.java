@@ -3,13 +3,17 @@ package com.globallogic.mykolaiv.campustrainees.simplewebapp.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotNull;
+
 @Document(collection = "users")
 public class UserEntity {
     @Id
     private String userId;
 
+    @NotNull
     private String username;
 
+    @NotNull
     private String password;
 
     public UserEntity() {

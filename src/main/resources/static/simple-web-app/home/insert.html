@@ -9,26 +9,26 @@
 <form ng-submit="addBook()" name="form" role="form">
     <div class="form-group">
         <label for="bookTitle">Title:</label>
-        <input type="text" class="form-control" id="bookTitle" name="bookTitle" ng-model="bookTitle" required>
+        <input maxlength="25" type="text" class="form-control" id="bookTitle" name="bookTitle" ng-model="bookTitle" required>
         <span class="error" ng-show="form.bookTitle.$dirty && form.bookTitle.$error.required" >Title is required</span>
     </div>
     <div class="form-group">
         <label for="genre">Genre:</label>
-        <input type="text" class="form-control" id="genre" ng-model="bookGenre" name="bookGenre" required>
+        <input maxlength="30" type="text" class="form-control" id="genre" ng-model="bookGenre" name="bookGenre" required>
         <span class="error" ng-show="form.bookGenre.$dirty && form.bookGenre.$error.required" >Title is required</span>
     </div>
     <div class="form-group">
         <label for="author">Author</label>
-        <input type="text" class="form-control" id="author" ng-model="bookAuthor"  name="bookAuthor" required>
+        <input maxlength="30" type="text" class="form-control" id="author" ng-model="bookAuthor"  name="bookAuthor" required>
         <span class="error" ng-show="form.bookAuthor.$dirty && form.bookAuthor.$error.required" >Title is required</span>
     </div>
     <div class="form-group">
         <label for="pages">Pages:</label>
-        <input type="number" class="form-control" id="pages" ng-model="pages" required>
+        <input maxlength="4" type="number" class="form-control" id="pages" ng-model="pages" required>
     </div>
     <div class="form-group">
         <label for="description">Description:</label>
-        <input type="text" class="form-control" id="description" ng-model="bookDescription" name="bookDescription" required>
+        <input maxlength="80" type="text" class="form-control" id="description" ng-model="bookDescription" name="bookDescription" required>
         <span class="error" ng-show="form.bookDescription.$dirty && form.bookDescription.$error.required" >Title is required</span>
     </div>
     <button type="submit" class="btn btn-default" ng-disabled="form.$invalid">Submit</button>

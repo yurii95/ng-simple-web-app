@@ -53,12 +53,7 @@ public class BookService {
 
     public BookEntity addBook(BookEntity bookEntity) throws ServiceException {
         try {
-            if (StringUtils.isNoneBlank(bookEntity.getTitle(), bookEntity.getGenre(),
-                    bookEntity.getAuthors(), bookEntity.getPages(), bookEntity.getDescription())) {
-                return bookRepository.save(bookEntity);
-            } else {
-                throw new IllegalArgumentException("Object book entity contains fields with null");
-            }
+            return bookRepository.save(bookEntity);
         } catch (RuntimeException e) {
             logger.error(String.format("Exception during adding new book: %s", bookEntity.toString()), e);
             throw new ServiceException("Exception during adding new book", e);
