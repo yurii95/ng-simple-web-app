@@ -83,4 +83,27 @@ public class BookEntity {
                 ", description='" + description + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+
+        BookEntity that = (BookEntity) o;
+
+        return idBook.equals(that.idBook) && title.equals(that.title) && genre.equals(that.genre) &&
+                authors.equals(that.authors) && pages.equals(that.pages) && description.equals(that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = idBook.hashCode();
+        result = 31 * result + title.hashCode();
+        result = 31 * result + genre.hashCode();
+        result = 31 * result + authors.hashCode();
+        result = 31 * result + pages.hashCode();
+        result = 31 * result + description.hashCode();
+        return result;
+    }
 }

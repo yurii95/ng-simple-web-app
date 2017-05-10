@@ -37,7 +37,7 @@ public class BookController {
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public List<BookEntity> findParticularBooks(@RequestParam(SEARCH_PARAM) String stringLike) {
-        return bookService.findParticularBooks(stringLike);
+        return bookService.findByStringLike(stringLike);
     }
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)

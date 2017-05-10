@@ -16,6 +16,9 @@ public class UserEntity {
     @NotNull
     private String password;
 
+    @NotNull
+    private String email;
+
     public UserEntity() {
     }
 
@@ -43,12 +46,21 @@ public class UserEntity {
         this.username = username;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "UserEntity{" +
-                "userId=" + userId +
+                "userId='" + userId + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

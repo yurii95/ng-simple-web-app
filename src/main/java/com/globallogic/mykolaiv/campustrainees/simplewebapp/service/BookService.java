@@ -36,7 +36,7 @@ public class BookService {
     }
 
     @Transactional(readOnly = true)
-    public List<BookEntity> findParticularBooks(String stringLike) throws ServiceException {
+    public List<BookEntity> findByStringLike(String stringLike) throws ServiceException {
         try {
             if (StringUtils.isNotBlank(stringLike)) {
                 logger.info(String.format("Search request with parameter = %s will be executed", stringLike));
